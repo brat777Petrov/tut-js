@@ -94,6 +94,6 @@ const task2 = {
       for ( i = ( arrLength - 1 ); i >= 0; i-- ) {
         arrNew[i] = arr.splice(i*chunkSize);
       }
-      return arrNew
+      return arrNew;
     }
 };
