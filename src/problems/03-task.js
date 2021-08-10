@@ -5,13 +5,18 @@ const task3 = {
     isPalindrome('aabbaa') => true;
      */
     isPalindrome: function(str) {
-      const arrChars = str.split('');
-      const arrCharsReverse = str.split('').reverse();
-
-      for ( i = 0; i < arrChars.length; i++ ) {
-        if (arrChars[i] != arrCharsReverse[i]) return false;
+      if (str.length === 1) {
+        return true;
+      } else if (str.length%2) {
+        return false;
+      } else {
+        for (let i = 0; i < str.length/2; i++) {
+         if (str[i] !== str[str.length-i-1]){
+           return false;
+         };
+        }
+        return true;
       }
-      return true;
     },
 
     /*
@@ -19,34 +24,21 @@ const task3 = {
     charCount('Hello') => H: 1, e: 1, l: 2, o: 1
      */
     charCount: function(str) {
-      let char = [];
-      let countChar = [];
-      let flagNew;
-      const strChar = str.split('');
-      char[0] = strChar[0];
-      countChar[0] = 1;
-          
-      for ( let i = 1; i < strChar.length; i++ ) {
-        flagNew = true;
-        for (let j = 0; j < char.length; j++ ) {
-          if (strChar[i] === char[j]) {
-            countChar[j]++;
-            flagNew = false;
-          }
-        }
-        if ( flagNew ) {
-          char.push(strChar[i]);
-          countChar[char.length-1] = 1;
+      let char = {};
+      for (let i =0; i < str.length; i++) {
+        if (!char[str[i]]) {
+          char[str[i]] = 1;
+        } else {
+          char[str[i]] += 1;
         }
       }
-      
-      let answer = '';
-      for ( let i = 0; i < char.length; i++ ) {
-        answer += char[i] + ': ' + countChar[i];
-        if ( i != (char.length - 1) ) answer += ', ';
+     
+      let result ='';
+      for ( let key in char) {
+       result += key + ': ' + char[key] + ', ';
       }
-    
-      return answer;
+ 
+      return result.slice(0,result.length - 2);
     },
 
     /*
@@ -55,14 +47,9 @@ const task3 = {
     areAnagrams('O, Draconian devil', 'Leonardo da Vinci') => true;
      */
     areAnagrams: function(str1, str2) {
-      const newStr1 = str1.toLowerCase(); 
-      const newStr2 = str2.toLowerCase();
-      let arr1 = newStr1.match(/\w/gi).sort();
-      let arr2 = newStr2.match(/\w/gi).sort();
+      const strNew1 = str1.toLowerCase().match(/\w/g).sort();
+      const strNew2 = str2.toLowerCase().match(/\w/g).sort();
       
-      for ( let i = 0; i < arr1.length; i++ ) {
-        if ( arr1[i] != arr2[i] ) return false;
-      }
-      return true;
+      return (charCount(strNew1) === charCount(strNew2));
     },
 };
