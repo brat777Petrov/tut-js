@@ -12,14 +12,37 @@ const task4 = {
          * https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest
          *  
          */
+          const fullUrl = url + '?' + params;
+
+          let x = new XMLHttpRequest();
+          x.open("GET", fullUrl, true);
+          x.send();
+          x.onload = callback(null, data);
+          x.onerror = callback(error);                        
+
+        }
     },
 
     objectToQuery(obj) {
         //ф-ция на вход получает объект {key1: value1, key2: value2,.... } и возваращет строку в виде key1=value1&key2=value2....
+        let param = '';
+        for ( let key in obj ) {
+          param += key + '=' + obj[key] + '&';
+        }
+        return param.substring(0, param.length-1) ;
     },
 
     queryToObject(query) {
         //ф-ция на вход получает строку в виде key1=value1&key2=value2.... и возваращет объект {key1: value1, key2: value2,.... }
+        const arrParam = query.split('&');
+        let arrEl = [];
+        let res = {};
+        for ( let i = 0; i < arrParam.length; i++ ) {
+          arrEl = arrParam[i].split('=');
+          res[arrEl[0]] = arrEl[1];
+        }
+    
+        return res;
     }
 
 };
