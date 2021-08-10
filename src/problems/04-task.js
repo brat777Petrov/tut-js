@@ -21,7 +21,7 @@ const task4 = {
           x.onerror = callback(error);                        
 
         }
-    },
+    ,
 
     objectToQuery(obj) {
         //ф-ция на вход получает объект {key1: value1, key2: value2,.... } и возваращет строку в виде key1=value1&key2=value2....
