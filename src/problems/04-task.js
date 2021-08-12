@@ -12,8 +12,8 @@ const task4 = {
          * https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest
          *  
          */
-          const fullUrl = encodeURIComponent(url) + encodeURIComponent('?')
-           + encodeURIComponent(params);
+          const fullUrl = url + encodeURIComponent('?')
+           + objectToQuery(params);
           
            let x = new XMLHttpRequest();
           x.open("GET", fullUrl);
@@ -31,8 +31,8 @@ const task4 = {
         //ф-ция на вход получает объект {key1: value1, key2: value2,.... } и возваращет строку в виде key1=value1&key2=value2....
         let param = '';
         for ( let key in obj ) {
-          param += encodeURIComponent(key) + encodeURIComponent('=') + encodeURIComponent(obj[key])
-           + encodeURIComponent('&');
+          param += encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
+           + '&';
 
         }
         return param.substring(0, param.length-1) ;
