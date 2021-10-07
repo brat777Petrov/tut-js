@@ -12,7 +12,7 @@ const task4 = {
          * https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest
          *  
          */
-          const fullUrl = url + encodeURIComponent('?')
+          const fullUrl = url + '?'
            + objectToQuery(params);
           
            let x = new XMLHttpRequest();
